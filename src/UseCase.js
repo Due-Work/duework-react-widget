@@ -43,7 +43,7 @@ class UseCasePopup extends PureComponent {
   loadPopup = () => {
     const { onLoad, widget, workspaceId, blockId } = this.props;
     if (typeof window !== 'undefined' && window.dueWork) {
-      window.dueWork[widget].init(workspaceId);
+      window.dueWork[widget].init(workspaceId, blockId);
       if (onLoad) {
         onLoad();
       }

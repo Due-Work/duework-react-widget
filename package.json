@@ -1,18 +1,16 @@
 {
-  "name": "react-knowledge-base",
-  "version": "1.0.0",
+  "name": "react-widgets",
+  "version": "1.0.2",
   "description": "The simplest way to integrate wiki and knowledge base for growing teams. Beautiful, feature rich, and components..",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Due-Work/knowledge-base.git"
+    "url": "git+https://github.com/Due-Work/react-widgets.git"
   },
   "keywords": [
     "Wikis",
-    "Knowledge",
-    "Base",
-    "Help",
-    "Desk",
+    "KnowledgeBase",
+    "HelpDesk",
     "ReadMe",
     "Docs",
     "react",
@@ -21,9 +19,9 @@
   "author": "Robins Gupta",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Due-Work/knowledge-base/issues"
+    "url": "https://github.com/Due-Work/react-widgets/issues"
   },
-  "homepage": "https://github.com/Due-Work/knowledge-base#readme",
+  "homepage": "https://github.com/Due-Work/react-widgets#readme",
   "scripts": {
     "build": "mkdirp dist && babel src/UseCase.js --out-file dist/UseCase.js",
     "prepublish": "npm run build",
