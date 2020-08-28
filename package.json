@@ -1,6 +1,6 @@
 {
   "name": "react-widgets",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The simplest way to integrate wiki and knowledge base for growing teams. Beautiful, feature rich, and components..",
   "main": "index.js",
   "repository": {
