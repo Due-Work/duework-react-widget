@@ -10,10 +10,16 @@ The simplete way to integrate wiki and knowledge base, customer feedback, onboar
 
 [Due.Work](https://www.due.work)
 
-## Images
+## Due.Work Feedback
 
 ![Feedback](https://www.due.work/home/Feedback.png)
+
+## Due.Work Onboarding
+
 ![Onboarding](https://www.due.work/home/onboarding.png)
+
+## Due.Work Live Chat
+
 ![Live Chat](https://www.due.work/home/Live_Chat.png)
 
 ## Widgets Demo
