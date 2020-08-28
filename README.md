@@ -4,13 +4,13 @@ The simplete way to integrate wiki and knowledge base, customer feedback, onboar
 
 ## Widgets Demo
 
-- [Popup Widget Demo](https://www.due.work/use-cases/samples/popup.html){:target="\_blank"}
-- [Inline Widget Demo](https://www.due.work/use-cases/samples/inline.html){:target="\_blank"}
-- [Dialog Widget Demo](https://www.due.work/use-cases/samples/dialog.html){:target="\_blank"}
+- [Popup Widget Demo](https://www.due.work/use-cases/samples/popup.html){"\_blank"}
+- [Inline Widget Demo](https://www.due.work/use-cases/samples/inline.html){"\_blank"}
+- [Dialog Widget Demo](https://www.due.work/use-cases/samples/dialog.html){"\_blank"}
 
 ## Standalone Link Demo
 
-- [Sample Link](https://www.due.work/u/lsnWIg3c3G/help-and-support/lsnWIg3c3G){:target="\_blank"}
+- [Sample Link](https://www.due.work/u/lsnWIg3c3G/help-and-support/lsnWIg3c3G){"\_blank"}
 
 ## Installation
 
