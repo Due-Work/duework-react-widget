@@ -1,6 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
@@ -18,7 +18,9 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 
 var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _possibleConstructorReturn3 = _interopRequireDefault(
+  _possibleConstructorReturn2
+);
 
 var _inherits2 = require('babel-runtime/helpers/inherits');
 
@@ -38,7 +40,9 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 /* eslint-disable no-undef */
 /**
@@ -50,100 +54,135 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 var URL = 'https://www.due.work/api/snippet';
 
-var UseCaseScript = function () {
-  var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(src, callback) {
-    var script;
-    return _regenerator2.default.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            if (typeof window !== 'undefined' && !window.isIframe) {
-              script = document.createElement('script');
+var UseCaseScript = (function() {
+  var _ref = (0, _asyncToGenerator3.default)(
+    /*#__PURE__*/ _regenerator2.default.mark(function _callee(src, callback) {
+      var script;
+      return _regenerator2.default.wrap(
+        function _callee$(_context) {
+          while (1) {
+            switch ((_context.prev = _context.next)) {
+              case 0:
+                if (typeof window !== 'undefined' && !window.isIframe) {
+                  script = document.createElement('script');
 
-              script.src = src;
-              script.addEventListener('load', function () {
-                callback();
-              });
-              script.addEventListener('error', function (error) {
-                callback(error);
-              });
-              document.body.appendChild(script);
+                  script.src = src;
+                  script.addEventListener('load', function() {
+                    callback();
+                  });
+                  script.addEventListener('error', function(error) {
+                    callback(error);
+                  });
+                  document.body.appendChild(script);
+                }
+
+              case 1:
+              case 'end':
+                return _context.stop();
             }
-
-          case 1:
-          case 'end':
-            return _context.stop();
-        }
-      }
-    }, _callee, undefined);
-  }));
+          }
+        },
+        _callee,
+        undefined
+      );
+    })
+  );
 
   return function UseCaseScript(_x, _x2) {
     return _ref.apply(this, arguments);
   };
-}();
+})();
 
-var UseCasePopup = function (_PureComponent) {
+var UseCasePopup = (function(_PureComponent) {
   (0, _inherits3.default)(UseCasePopup, _PureComponent);
 
   function UseCasePopup() {
     var _ref2,
-        _this2 = this;
+      _this2 = this;
 
     var _temp, _this, _ret;
 
     (0, _classCallCheck3.default)(this, UseCasePopup);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (
+      var _len = arguments.length, args = Array(_len), _key = 0;
+      _key < _len;
+      _key++
+    ) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref2 = UseCasePopup.__proto__ || (0, _getPrototypeOf2.default)(UseCasePopup)).call.apply(_ref2, [this].concat(args))), _this), _this.loadPopup = function () {
-      var _this$props = _this.props,
-          onLoad = _this$props.onLoad,
-          widget = _this$props.widget,
-          workspaceId = _this$props.workspaceId,
-          blockId = _this$props.blockId;
+    return (
+      (_ret =
+        ((_temp =
+          ((_this = (0, _possibleConstructorReturn3.default)(
+            this,
+            (_ref2 =
+              UseCasePopup.__proto__ ||
+              (0, _getPrototypeOf2.default)(UseCasePopup)).call.apply(
+              _ref2,
+              [this].concat(args)
+            )
+          )),
+          _this)),
+        (_this.loadPopup = function() {
+          var _this$props = _this.props,
+            onLoad = _this$props.onLoad,
+            widget = _this$props.widget,
+            workspaceId = _this$props.workspaceId,
+            blockId = _this$props.blockId;
 
-      if (typeof window !== 'undefined' && window.dueWork) {
-        window.dueWork[widget].init(workspaceId, blockId);
-        if (onLoad) {
-          onLoad();
-        }
-      }
-    }, _this.loadScript = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
-      return _regenerator2.default.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return UseCaseScript(URL, _this.loadPopup);
-
-            case 2:
-            case 'end':
-              return _context2.stop();
+          if (typeof window !== 'undefined' && window.dueWork) {
+            window.dueWork[widget].init(workspaceId, blockId);
+            if (onLoad) {
+              onLoad();
+            }
           }
-        }
-      }, _callee2, _this2);
-    })), _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+        }),
+        (_this.loadScript = (0, _asyncToGenerator3.default)(
+          /*#__PURE__*/ _regenerator2.default.mark(function _callee2() {
+            return _regenerator2.default.wrap(
+              function _callee2$(_context2) {
+                while (1) {
+                  switch ((_context2.prev = _context2.next)) {
+                    case 0:
+                      _context2.next = 2;
+                      return UseCaseScript(URL, _this.loadPopup);
+
+                    case 2:
+                    case 'end':
+                      return _context2.stop();
+                  }
+                }
+              },
+              _callee2,
+              _this2
+            );
+          })
+        )),
+        _temp)),
+      (0, _possibleConstructorReturn3.default)(_this, _ret)
+    );
   }
 
-  (0, _createClass3.default)(UseCasePopup, [{
-    key: 'render',
-    value: function render() {
-      var _this3 = this;
+  (0, _createClass3.default)(UseCasePopup, [
+    {
+      key: 'render',
+      value: function render() {
+        var _this3 = this;
 
-      if (typeof window !== 'undefined' && !window.dueWork) {
-        setTimeout(function () {
-          _this3.loadScript();
-        });
+        if (typeof window !== 'undefined' && !window.dueWork) {
+          setTimeout(function() {
+            _this3.loadScript();
+          });
+        }
+
+        return null;
       }
-
-      return null;
     }
-  }]);
+  ]);
   return UseCasePopup;
-}(_react.PureComponent);
+})(_react.PureComponent);
 
 UseCasePopup.propTypes = {
   onLoad: _propTypes2.default.func,
