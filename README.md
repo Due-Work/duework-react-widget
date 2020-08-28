@@ -43,4 +43,4 @@ import ReactWidget from 'react-widgets';
 | Name           | Required | Type         | Default   | Description                                                                                                          |
 | :------------- | :------- | :----------- | :-------- | :------------------------------------------------------------------------------------------------------------------- |
 | `onLoad`       |          | `Function`   |           | A callback to be called when widget is loaded successfully. `function onLoad() { /* Widget Loaded Successfully */ }` |
-| `widget`       |          | `String`     | `popup`   | Type of widget on which you want to load your plugins. `[popup|dialog|inline]`                                       |
+| `widget`       |          | `String`     | `popup`   | Type of widget on which you want to load your plugins `popup|dialog|inline`                                          |
