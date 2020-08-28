@@ -29,17 +29,17 @@ The simplete way to integrate wiki and knowledge base, customer feedback, onboar
 ## Installation
 
 ```
-npm install react-widgets --save
+npm install react-widgets-plugin --save
 ```
 
 ```
-yarn add react-widgets
+yarn add react-widgets-plugin
 ```
 
 ## How to use
 
 ```js
-import ReactWidget from 'react-widgets';
+import ReactWidget from 'react-widgets-plugin';
 ```
 
 ```js
