@@ -1,17 +1,22 @@
 {
-  "name": "react-widgets-plugin",
-  "version": "1.0.4",
+  "name": "react-widget-plugins",
+  "version": "1.0.5",
   "description": "The simplest way to integrate wiki and knowledge base for growing teams. Beautiful, feature rich, and components..",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Due-Work/react-widgets.git"
+    "url": "git+https://github.com/Due-Work/react-widget-plugins.git"
   },
   "keywords": [
     "Wikis",
     "KnowledgeBase",
     "HelpDesk",
     "ReadMe",
+    "Onboarding",
+    "Feedback",
+    "CustomerFeedback",
+    "Due.Work",
+    "DueWork",
     "Docs",
     "react",
     "javascript"
@@ -19,9 +24,9 @@
   "author": "Robins Gupta",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Due-Work/react-widgets/issues"
+    "url": "https://github.com/Due-Work/react-widget-plugins/issues"
   },
-  "homepage": "https://github.com/Due-Work/react-widgets#readme",
+  "homepage": "https://github.com/Due-Work/react-widget-plugins#readme",
   "scripts": {
     "build": "mkdirp dist && babel src/UseCase.js --out-file dist/UseCase.js",
     "prepublish": "npm run build",
