@@ -30,14 +30,16 @@ class UseCasePopup extends PureComponent {
     onLoad: PropTypes.func,
     widget: PropTypes.string,
     workspaceId: PropTypes.string,
-    blockId: PropTypes.string
+    blockId: PropTypes.string,
+    url: PropTypes.string
   };
 
   static defaultProps = {
     onLoad: null,
     widget: 'popup',
     workspaceId: '',
-    blockId: ''
+    blockId: '',
+    url: URL
   };
 
   loadPopup = () => {
@@ -51,7 +53,8 @@ class UseCasePopup extends PureComponent {
   };
 
   loadScript = async () => {
-    await UseCaseScript(URL, this.loadPopup);
+    const { url } = this.props;
+    await UseCaseScript(url, this.loadPopup);
   };
 
   render() {
