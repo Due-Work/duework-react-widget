@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-undef */
 /**
  * @author Robins Gupta
@@ -9,12 +10,17 @@
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-const URL = `https://www.due.work/api/snippet`;
+const URL = `https://www.due.work/app/widgets/snippet.js`;
 
-const UseCaseScript = async (src, callback) => {
-  if (typeof window !== 'undefined' && !window.isIframe) {
+let isScriptLoaded;
+
+const UseCaseScript = async (src, widgetType, workspaceId, callback) => {
+  if (!isScriptLoaded && typeof window !== 'undefined' && !window.isIframe) {
+    isScriptLoaded = true;
     const script = document.createElement('script');
     script.src = src;
+    script.setAttribute('data-workspaceId', workspaceId);
+    script.setAttribute('data-widgetType', widgetType);
     script.addEventListener('load', function() {
       callback();
     });
@@ -28,24 +34,21 @@ const UseCaseScript = async (src, callback) => {
 class UseCasePopup extends PureComponent {
   static propTypes = {
     onLoad: PropTypes.func,
-    widget: PropTypes.string,
-    workspaceId: PropTypes.string,
+    widgetType: PropTypes.string,
+    workspaceId: PropTypes.string.isRequired,
     blockId: PropTypes.string,
     url: PropTypes.string
   };
 
   static defaultProps = {
     onLoad: null,
-    widget: 'popup',
-    workspaceId: '',
-    blockId: '',
+    widgetType: 'popup',
     url: URL
   };
 
   loadPopup = () => {
-    const { onLoad, widget, workspaceId, blockId } = this.props;
+    const { onLoad } = this.props;
     if (typeof window !== 'undefined' && window.dueWork) {
-      window.dueWork[widget].init(workspaceId, blockId);
       if (onLoad) {
         onLoad();
       }
@@ -53,15 +56,18 @@ class UseCasePopup extends PureComponent {
   };
 
   loadScript = async () => {
-    const { url } = this.props;
-    await UseCaseScript(url, this.loadPopup);
+    const { url, widgetType, workspaceId } = this.props;
+    if (!workspaceId) {
+      console.error(
+        'workspaceId is required. Check out https://help.due.work for more info'
+      );
+    }
+    await UseCaseScript(url, widgetType, workspaceId, this.loadPopup);
   };
 
   render() {
-    if (typeof window !== 'undefined' && !window.dueWork) {
-      setTimeout(() => {
-        this.loadScript();
-      });
+    if (!isScriptLoaded && typeof window !== 'undefined' && !window.dueWork) {
+      this.loadScript();
     }
 
     return null;

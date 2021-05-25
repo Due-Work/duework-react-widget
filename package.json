@@ -1,11 +1,11 @@
 {
-  "name": "react-widget-plugins",
-  "version": "1.0.6",
-  "description": "The simplest way to integrate wiki and knowledge base for growing teams. Beautiful, feature rich, and components..",
+  "name": "duework-widget",
+  "version": "1.0.7",
+  "description": "DueWork widget for React",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Due-Work/react-widget-plugins.git"
+    "url": "git+https://github.com/Due-Work/duework-react-widget.git"
   },
   "keywords": [
     "Wikis",
@@ -24,9 +24,9 @@
   "author": "Robins Gupta",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Due-Work/react-widget-plugins/issues"
+    "url": "https://github.com/Due-Work/duework-react-widget/issues"
   },
-  "homepage": "https://github.com/Due-Work/react-widget-plugins#readme",
+  "homepage": "https://github.com/Due-Work/duework-react-widget#readme",
   "scripts": {
     "build": "mkdirp dist && babel src/UseCase.js --out-file dist/UseCase.js",
     "prepublish": "npm run build",
