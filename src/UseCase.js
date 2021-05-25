@@ -14,13 +14,43 @@ const URL = `https://www.due.work/app/widgets/snippet.js`;
 
 let isScriptLoaded;
 
-const UseCaseScript = async (src, widgetType, workspaceId, callback) => {
+const UseCaseScript = async (
+  src,
+  widgetType,
+  workspaceId,
+  userId,
+  email,
+  firstName,
+  lastName,
+  profileUrl,
+  callback
+) => {
   if (!isScriptLoaded && typeof window !== 'undefined' && !window.isIframe) {
     isScriptLoaded = true;
     const script = document.createElement('script');
     script.src = src;
     script.setAttribute('data-workspaceId', workspaceId);
     script.setAttribute('data-widgetType', widgetType);
+    if (userId) {
+      script.setAttribute('data-userId', userId);
+    }
+
+    if (email) {
+      script.setAttribute('data-email', email);
+    }
+
+    if (firstName) {
+      script.setAttribute('data-firstName', firstName);
+    }
+
+    if (lastName) {
+      script.setAttribute('data-lastName', lastName);
+    }
+
+    if (profileUrl) {
+      script.setAttribute('data-profileUrl', profileUrl);
+    }
+
     script.addEventListener('load', function() {
       callback();
     });
@@ -37,13 +67,23 @@ class UseCasePopup extends PureComponent {
     widgetType: PropTypes.string,
     workspaceId: PropTypes.string.isRequired,
     blockId: PropTypes.string,
-    url: PropTypes.string
+    url: PropTypes.string,
+    userId: PropTypes.string,
+    email: PropTypes.string,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    profileUrl: PropTypes.string
   };
 
   static defaultProps = {
     onLoad: null,
     widgetType: 'popup',
-    url: URL
+    url: URL,
+    userId: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    profileUrl: ''
   };
 
   loadPopup = () => {
@@ -56,13 +96,33 @@ class UseCasePopup extends PureComponent {
   };
 
   loadScript = async () => {
-    const { url, widgetType, workspaceId } = this.props;
+    const {
+      url,
+      widgetType,
+      workspaceId,
+      userId,
+      email,
+      firstName,
+      lastName,
+      profileUrl
+    } = this.props;
     if (!workspaceId) {
       console.error(
         'workspaceId is required. Check out https://help.due.work for more info'
       );
+    } else {
+      await UseCaseScript(
+        url,
+        widgetType,
+        workspaceId,
+        userId,
+        email,
+        firstName,
+        lastName,
+        profileUrl,
+        this.loadPopup
+      );
     }
-    await UseCaseScript(url, widgetType, workspaceId, this.loadPopup);
   };
 
   render() {
