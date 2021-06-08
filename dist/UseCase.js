@@ -124,22 +124,113 @@ var UseCasePopup = function (_PureComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref2 = UseCasePopup.__proto__ || (0, _getPrototypeOf2.default)(UseCasePopup)).call.apply(_ref2, [this].concat(args))), _this), _this.loadPopup = function () {
-      var onLoad = _this.props.onLoad;
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref2 = UseCasePopup.__proto__ || (0, _getPrototypeOf2.default)(UseCasePopup)).call.apply(_ref2, [this].concat(args))), _this), _this.componentDidUpdate = function (_ref3) {
+      var oldHide = _ref3.hide,
+          oldOpen = _ref3.open,
+          oldWorkspaceId = _ref3.workspaceId;
+      var _this$props = _this.props,
+          hide = _this$props.hide,
+          open = _this$props.open,
+          workspaceId = _this$props.workspaceId;
+
+      if (hide !== oldHide) {
+        if (hide) {
+          _this.hide();
+        } else {
+          _this.show();
+        }
+      }
+
+      if (open !== oldOpen) {
+        if (open) {
+          _this.open();
+        } else {
+          _this.close();
+        }
+      }
+
+      if (workspaceId !== oldWorkspaceId) {
+        _this.init(workspaceId);
+      }
+    }, _this.loadPopup = function () {
+      var _this$props2 = _this.props,
+          onLoad = _this$props2.onLoad,
+          hide = _this$props2.hide,
+          open = _this$props2.open,
+          widgetType = _this$props2.widgetType;
 
       if (typeof window !== 'undefined' && window.dueWork) {
         if (onLoad) {
           onLoad();
         }
+
+        if (open) {
+          _this.open();
+        }
+
+        if (hide) {
+          _this.hide();
+        }
+      }
+    }, _this.close = function () {
+      var widgetType = _this.props.widgetType;
+
+      if (typeof window !== 'undefined' && window.dueWork) {
+        window.dueWork[widgetType].close();
+      }
+    }, _this.init = function () {
+      var _this$props3 = _this.props,
+          widgetType = _this$props3.widgetType,
+          workspaceId = _this$props3.workspaceId;
+
+      if (typeof window !== 'undefined' && window.dueWork) {
+        window.dueWork[widgetType].init(workspaceId);
+      }
+    }, _this.open = function () {
+      var widgetType = _this.props.widgetType;
+
+      if (typeof window !== 'undefined' && window.dueWork) {
+        window.dueWork[widgetType].open();
+      }
+    }, _this.show = function () {
+      var widgetType = _this.props.widgetType;
+
+      if (typeof window !== 'undefined' && window.dueWork) {
+        window.dueWork[widgetType].show();
+      }
+    }, _this.hide = function () {
+      var widgetType = _this.props.widgetType;
+
+      if (typeof window !== 'undefined' && window.dueWork) {
+        window.dueWork[widgetType].hide();
+      }
+    }, _this.identify = function () {
+      var _this$props4 = _this.props,
+          userId = _this$props4.userId,
+          email = _this$props4.email,
+          firstName = _this$props4.firstName,
+          lastName = _this$props4.lastName,
+          profileUrl = _this$props4.profileUrl,
+          widgetType = _this$props4.widgetType;
+
+      if (typeof window !== 'undefined' && window.dueWork) {
+        if (userId && window.dueWork[widgetType]) {
+          window.dueWork[widgetType].identify(userId, {
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            profileUrl: profileUrl
+          });
+        }
       }
     }, _this.loadScript = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
-      var _this$props, url, widgetType, workspaceId, userId, email, firstName, lastName, profileUrl;
+      var _this$props5, url, widgetType, workspaceId, userId, email, firstName, lastName, profileUrl;
 
       return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _this$props = _this.props, url = _this$props.url, widgetType = _this$props.widgetType, workspaceId = _this$props.workspaceId, userId = _this$props.userId, email = _this$props.email, firstName = _this$props.firstName, lastName = _this$props.lastName, profileUrl = _this$props.profileUrl;
+              _this$props5 = _this.props, url = _this$props5.url, widgetType = _this$props5.widgetType, workspaceId = _this$props5.workspaceId, userId = _this$props5.userId, email = _this$props5.email, firstName = _this$props5.firstName, lastName = _this$props5.lastName, profileUrl = _this$props5.profileUrl;
 
               if (workspaceId) {
                 _context2.next = 5;
@@ -186,7 +277,9 @@ UseCasePopup.propTypes = {
   email: _propTypes2.default.string,
   firstName: _propTypes2.default.string,
   lastName: _propTypes2.default.string,
-  profileUrl: _propTypes2.default.string
+  profileUrl: _propTypes2.default.string,
+  hide: _propTypes2.default.bool,
+  open: _propTypes2.default.bool
 };
 UseCasePopup.defaultProps = {
   onLoad: null,
@@ -196,7 +289,9 @@ UseCasePopup.defaultProps = {
   email: '',
   firstName: '',
   lastName: '',
-  profileUrl: ''
+  profileUrl: '',
+  hide: false,
+  open: false
 };
 exports.default = UseCasePopup;
 module.exports = exports['default'];
