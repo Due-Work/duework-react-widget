@@ -167,21 +167,21 @@ var UseCasePopup = function (_PureComponent) {
         _this.setTheme(theme);
       }
 
-      if (oldOnOpenFn !== onOpen && onOpen) {
-        _this.subscribeOnOpen();
-      }
+      // if (oldOnOpenFn !== onOpen && onOpen) {
+      //   this.subscribeOnOpen();
+      // }
 
-      if (oldOnClose !== onClose && onClose) {
-        _this.subscribeOnClose();
-      }
+      // if (oldOnClose !== onClose && onClose) {
+      //   this.subscribeOnClose();
+      // }
 
-      if (oldOnLoginSuccess !== onLoginSuccess && onLoginSuccess) {
-        _this.subscribeOnLoginSuccess();
-      }
+      // if (oldOnLoginSuccess !== onLoginSuccess && onLoginSuccess) {
+      //   this.subscribeOnLoginSuccess();
+      // }
 
-      if (oldOnNewTicket !== onNewTicket && onNewTicket) {
-        _this.subscribeOnNewTicket();
-      }
+      // if (oldOnNewTicket !== onNewTicket && onNewTicket) {
+      //   this.subscribeOnNewTicket();
+      // }
     }, _this.loadPopup = function () {
       var _this$props2 = _this.props,
           onLoad = _this$props2.onLoad,
