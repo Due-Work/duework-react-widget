@@ -72,7 +72,9 @@ class UseCasePopup extends PureComponent {
     email: PropTypes.string,
     firstName: PropTypes.string,
     lastName: PropTypes.string,
-    profileUrl: PropTypes.string
+    profileUrl: PropTypes.string,
+    hide: PropTypes.bool,
+    open: PropTypes.bool
   };
 
   static defaultProps = {
@@ -83,14 +85,107 @@ class UseCasePopup extends PureComponent {
     email: '',
     firstName: '',
     lastName: '',
-    profileUrl: ''
+    profileUrl: '',
+    hide: false,
+    open: false
+  };
+
+  componentDidUpdate = ({
+    hide: oldHide,
+    open: oldOpen,
+    workspaceId: oldWorkspaceId
+  }) => {
+    const { hide, open, workspaceId } = this.props;
+    if (hide !== oldHide) {
+      if (hide) {
+        this.hide();
+      } else {
+        this.show();
+      }
+    }
+
+    if (open !== oldOpen) {
+      if (open) {
+        this.open();
+      } else {
+        this.close();
+      }
+    }
+
+    if (workspaceId !== oldWorkspaceId) {
+      this.init(workspaceId);
+    }
   };
 
   loadPopup = () => {
-    const { onLoad } = this.props;
+    const { onLoad, hide, open, widgetType } = this.props;
     if (typeof window !== 'undefined' && window.dueWork) {
       if (onLoad) {
         onLoad();
+      }
+
+      if (open) {
+        this.open();
+      }
+
+      if (hide) {
+        this.hide();
+      }
+    }
+  };
+
+  close = () => {
+    const { widgetType } = this.props;
+    if (typeof window !== 'undefined' && window.dueWork) {
+      window.dueWork[widgetType].close();
+    }
+  };
+
+  init = () => {
+    const { widgetType, workspaceId } = this.props;
+    if (typeof window !== 'undefined' && window.dueWork) {
+      window.dueWork[widgetType].init(workspaceId);
+    }
+  };
+
+  open = () => {
+    const { widgetType } = this.props;
+    if (typeof window !== 'undefined' && window.dueWork) {
+      window.dueWork[widgetType].open();
+    }
+  };
+
+  show = () => {
+    const { widgetType } = this.props;
+    if (typeof window !== 'undefined' && window.dueWork) {
+      window.dueWork[widgetType].show();
+    }
+  };
+
+  hide = () => {
+    const { widgetType } = this.props;
+    if (typeof window !== 'undefined' && window.dueWork) {
+      window.dueWork[widgetType].hide();
+    }
+  };
+
+  identify = () => {
+    const {
+      userId,
+      email,
+      firstName,
+      lastName,
+      profileUrl,
+      widgetType
+    } = this.props;
+    if (typeof window !== 'undefined' && window.dueWork) {
+      if (userId && window.dueWork[widgetType]) {
+        window.dueWork[widgetType].identify(userId, {
+          email,
+          firstName,
+          lastName,
+          profileUrl
+        });
       }
     }
   };
