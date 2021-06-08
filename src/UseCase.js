@@ -63,7 +63,6 @@ const UseCaseScript = async (
 
 class UseCasePopup extends PureComponent {
   static propTypes = {
-    onLoad: PropTypes.func,
     widgetType: PropTypes.string,
     workspaceId: PropTypes.string.isRequired,
     url: PropTypes.string,
@@ -74,11 +73,17 @@ class UseCasePopup extends PureComponent {
     profileUrl: PropTypes.string,
     hide: PropTypes.bool,
     open: PropTypes.bool,
-    theme: PropTypes.oneOf(['yellow', 'dark', 'white'])
+    theme: PropTypes.oneOf(['yellow', 'dark', 'white']),
+
+    // Events
+    onLoad: PropTypes.func,
+    onOpen: PropTypes.func,
+    onClose: PropTypes.func,
+    onLoginSuccess: PropTypes.func,
+    onNewTicket: PropTypes.func
   };
 
   static defaultProps = {
-    onLoad: null,
     widgetType: 'popup',
     url: URL,
     userId: '',
@@ -88,16 +93,36 @@ class UseCasePopup extends PureComponent {
     profileUrl: '',
     hide: false,
     open: false,
-    theme: undefined
+    theme: undefined,
+
+    // Events
+    onLoad: null,
+    onOpen: null,
+    onClose: null,
+    onLoginSuccess: null,
+    onNewTicket: null
   };
 
   componentDidUpdate = ({
     hide: oldHide,
     open: oldOpen,
     workspaceId: oldWorkspaceId,
-    theme: oldTheme
+    theme: oldTheme,
+    onOpen: oldOnOpenFn,
+    onClose: oldOnClose,
+    onLoginSuccess: oldOnLoginSuccess,
+    onNewTicket: oldOnNewTicket
   }) => {
-    const { hide, open, workspaceId, theme } = this.props;
+    const {
+      hide,
+      open,
+      workspaceId,
+      theme,
+      onOpen,
+      onClose,
+      onLoginSuccess,
+      onNewTicket
+    } = this.props;
     if (hide !== oldHide) {
       if (hide) {
         this.hide();
@@ -121,14 +146,36 @@ class UseCasePopup extends PureComponent {
     if (oldTheme !== theme) {
       this.setTheme(theme);
     }
+
+    if (oldOnOpenFn !== onOpen && onOpen) {
+      this.subscribeOnOpen();
+    }
+
+    if (oldOnClose !== onClose && onClose) {
+      this.subscribeOnClose();
+    }
+
+    if (oldOnLoginSuccess !== onLoginSuccess && onLoginSuccess) {
+      this.subscribeOnLoginSuccess();
+    }
+
+    if (oldOnNewTicket !== onNewTicket && onNewTicket) {
+      this.subscribeOnNewTicket();
+    }
   };
 
   loadPopup = () => {
-    const { onLoad, hide, open, widgetType, theme } = this.props;
+    const { onLoad, hide, open, theme } = this.props;
     if (typeof window !== 'undefined' && window.dueWork) {
       if (onLoad) {
         onLoad();
       }
+
+      // Add event listener
+      this.subscribeOnOpen();
+      this.subscribeOnClose();
+      this.subscribeOnLoginSuccess();
+      this.subscribeOnNewTicket();
 
       if (open) {
         this.open();
@@ -141,6 +188,34 @@ class UseCasePopup extends PureComponent {
       if (theme) {
         this.setTheme(theme);
       }
+    }
+  };
+
+  subscribeOnOpen = () => {
+    const { widgetType, onOpen } = this.props;
+    if (typeof window !== 'undefined' && window.dueWork && onOpen) {
+      window.dueWork[widgetType].onOpen(onOpen);
+    }
+  };
+
+  subscribeOnClose = () => {
+    const { widgetType, onClose } = this.props;
+    if (typeof window !== 'undefined' && window.dueWork && onClose) {
+      window.dueWork[widgetType].onClose(onClose);
+    }
+  };
+
+  subscribeOnLoginSuccess = () => {
+    const { widgetType, onLoginSuccess } = this.props;
+    if (typeof window !== 'undefined' && window.dueWork && onLoginSuccess) {
+      window.dueWork[widgetType].onLoginSuccess(onLoginSuccess);
+    }
+  };
+
+  subscribeOnNewTicket = () => {
+    const { widgetType, onNewTicket } = this.props;
+    if (typeof window !== 'undefined' && window.dueWork && onNewTicket) {
+      window.dueWork[widgetType].onNewTicket(onNewTicket);
     }
   };
 
