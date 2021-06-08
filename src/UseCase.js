@@ -147,21 +147,21 @@ class UseCasePopup extends PureComponent {
       this.setTheme(theme);
     }
 
-    if (oldOnOpenFn !== onOpen && onOpen) {
-      this.subscribeOnOpen();
-    }
+    // if (oldOnOpenFn !== onOpen && onOpen) {
+    //   this.subscribeOnOpen();
+    // }
 
-    if (oldOnClose !== onClose && onClose) {
-      this.subscribeOnClose();
-    }
+    // if (oldOnClose !== onClose && onClose) {
+    //   this.subscribeOnClose();
+    // }
 
-    if (oldOnLoginSuccess !== onLoginSuccess && onLoginSuccess) {
-      this.subscribeOnLoginSuccess();
-    }
+    // if (oldOnLoginSuccess !== onLoginSuccess && onLoginSuccess) {
+    //   this.subscribeOnLoginSuccess();
+    // }
 
-    if (oldOnNewTicket !== onNewTicket && onNewTicket) {
-      this.subscribeOnNewTicket();
-    }
+    // if (oldOnNewTicket !== onNewTicket && onNewTicket) {
+    //   this.subscribeOnNewTicket();
+    // }
   };
 
   loadPopup = () => {
