@@ -66,7 +66,6 @@ class UseCasePopup extends PureComponent {
     onLoad: PropTypes.func,
     widgetType: PropTypes.string,
     workspaceId: PropTypes.string.isRequired,
-    blockId: PropTypes.string,
     url: PropTypes.string,
     userId: PropTypes.string,
     email: PropTypes.string,
@@ -74,7 +73,8 @@ class UseCasePopup extends PureComponent {
     lastName: PropTypes.string,
     profileUrl: PropTypes.string,
     hide: PropTypes.bool,
-    open: PropTypes.bool
+    open: PropTypes.bool,
+    theme: PropTypes.oneOf(['yellow', 'dark', 'white'])
   };
 
   static defaultProps = {
@@ -87,15 +87,17 @@ class UseCasePopup extends PureComponent {
     lastName: '',
     profileUrl: '',
     hide: false,
-    open: false
+    open: false,
+    theme: undefined
   };
 
   componentDidUpdate = ({
     hide: oldHide,
     open: oldOpen,
-    workspaceId: oldWorkspaceId
+    workspaceId: oldWorkspaceId,
+    theme: oldTheme
   }) => {
-    const { hide, open, workspaceId } = this.props;
+    const { hide, open, workspaceId, theme } = this.props;
     if (hide !== oldHide) {
       if (hide) {
         this.hide();
@@ -115,10 +117,14 @@ class UseCasePopup extends PureComponent {
     if (workspaceId !== oldWorkspaceId) {
       this.init(workspaceId);
     }
+
+    if (oldTheme !== theme) {
+      this.setTheme(theme);
+    }
   };
 
   loadPopup = () => {
-    const { onLoad, hide, open, widgetType } = this.props;
+    const { onLoad, hide, open, widgetType, theme } = this.props;
     if (typeof window !== 'undefined' && window.dueWork) {
       if (onLoad) {
         onLoad();
@@ -130,6 +136,10 @@ class UseCasePopup extends PureComponent {
 
       if (hide) {
         this.hide();
+      }
+
+      if (theme) {
+        this.setTheme(theme);
       }
     }
   };
@@ -166,6 +176,13 @@ class UseCasePopup extends PureComponent {
     const { widgetType } = this.props;
     if (typeof window !== 'undefined' && window.dueWork) {
       window.dueWork[widgetType].hide();
+    }
+  };
+
+  setTheme = () => {
+    const { widgetType, theme } = this.props;
+    if (typeof window !== 'undefined' && window.dueWork) {
+      window.dueWork[widgetType].setTheme(theme);
     }
   };
 

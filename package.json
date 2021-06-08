@@ -1,6 +1,6 @@
 {
   "name": "duework-widget",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "DueWork widget for React",
   "main": "index.js",
   "repository": {

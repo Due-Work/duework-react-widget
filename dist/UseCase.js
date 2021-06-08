@@ -127,11 +127,13 @@ var UseCasePopup = function (_PureComponent) {
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref2 = UseCasePopup.__proto__ || (0, _getPrototypeOf2.default)(UseCasePopup)).call.apply(_ref2, [this].concat(args))), _this), _this.componentDidUpdate = function (_ref3) {
       var oldHide = _ref3.hide,
           oldOpen = _ref3.open,
-          oldWorkspaceId = _ref3.workspaceId;
+          oldWorkspaceId = _ref3.workspaceId,
+          oldTheme = _ref3.theme;
       var _this$props = _this.props,
           hide = _this$props.hide,
           open = _this$props.open,
-          workspaceId = _this$props.workspaceId;
+          workspaceId = _this$props.workspaceId,
+          theme = _this$props.theme;
 
       if (hide !== oldHide) {
         if (hide) {
@@ -152,12 +154,17 @@ var UseCasePopup = function (_PureComponent) {
       if (workspaceId !== oldWorkspaceId) {
         _this.init(workspaceId);
       }
+
+      if (oldTheme !== theme) {
+        _this.setTheme(theme);
+      }
     }, _this.loadPopup = function () {
       var _this$props2 = _this.props,
           onLoad = _this$props2.onLoad,
           hide = _this$props2.hide,
           open = _this$props2.open,
-          widgetType = _this$props2.widgetType;
+          widgetType = _this$props2.widgetType,
+          theme = _this$props2.theme;
 
       if (typeof window !== 'undefined' && window.dueWork) {
         if (onLoad) {
@@ -170,6 +177,10 @@ var UseCasePopup = function (_PureComponent) {
 
         if (hide) {
           _this.hide();
+        }
+
+        if (theme) {
+          _this.setTheme(theme);
         }
       }
     }, _this.close = function () {
@@ -204,14 +215,22 @@ var UseCasePopup = function (_PureComponent) {
       if (typeof window !== 'undefined' && window.dueWork) {
         window.dueWork[widgetType].hide();
       }
-    }, _this.identify = function () {
+    }, _this.setTheme = function () {
       var _this$props4 = _this.props,
-          userId = _this$props4.userId,
-          email = _this$props4.email,
-          firstName = _this$props4.firstName,
-          lastName = _this$props4.lastName,
-          profileUrl = _this$props4.profileUrl,
-          widgetType = _this$props4.widgetType;
+          widgetType = _this$props4.widgetType,
+          theme = _this$props4.theme;
+
+      if (typeof window !== 'undefined' && window.dueWork) {
+        window.dueWork[widgetType].setTheme(theme);
+      }
+    }, _this.identify = function () {
+      var _this$props5 = _this.props,
+          userId = _this$props5.userId,
+          email = _this$props5.email,
+          firstName = _this$props5.firstName,
+          lastName = _this$props5.lastName,
+          profileUrl = _this$props5.profileUrl,
+          widgetType = _this$props5.widgetType;
 
       if (typeof window !== 'undefined' && window.dueWork) {
         if (userId && window.dueWork[widgetType]) {
@@ -224,13 +243,13 @@ var UseCasePopup = function (_PureComponent) {
         }
       }
     }, _this.loadScript = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
-      var _this$props5, url, widgetType, workspaceId, userId, email, firstName, lastName, profileUrl;
+      var _this$props6, url, widgetType, workspaceId, userId, email, firstName, lastName, profileUrl;
 
       return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _this$props5 = _this.props, url = _this$props5.url, widgetType = _this$props5.widgetType, workspaceId = _this$props5.workspaceId, userId = _this$props5.userId, email = _this$props5.email, firstName = _this$props5.firstName, lastName = _this$props5.lastName, profileUrl = _this$props5.profileUrl;
+              _this$props6 = _this.props, url = _this$props6.url, widgetType = _this$props6.widgetType, workspaceId = _this$props6.workspaceId, userId = _this$props6.userId, email = _this$props6.email, firstName = _this$props6.firstName, lastName = _this$props6.lastName, profileUrl = _this$props6.profileUrl;
 
               if (workspaceId) {
                 _context2.next = 5;
@@ -271,7 +290,6 @@ UseCasePopup.propTypes = {
   onLoad: _propTypes2.default.func,
   widgetType: _propTypes2.default.string,
   workspaceId: _propTypes2.default.string.isRequired,
-  blockId: _propTypes2.default.string,
   url: _propTypes2.default.string,
   userId: _propTypes2.default.string,
   email: _propTypes2.default.string,
@@ -279,7 +297,8 @@ UseCasePopup.propTypes = {
   lastName: _propTypes2.default.string,
   profileUrl: _propTypes2.default.string,
   hide: _propTypes2.default.bool,
-  open: _propTypes2.default.bool
+  open: _propTypes2.default.bool,
+  theme: _propTypes2.default.oneOf(['yellow', 'dark', 'white'])
 };
 UseCasePopup.defaultProps = {
   onLoad: null,
@@ -291,7 +310,8 @@ UseCasePopup.defaultProps = {
   lastName: '',
   profileUrl: '',
   hide: false,
-  open: false
+  open: false,
+  theme: undefined
 };
 exports.default = UseCasePopup;
 module.exports = exports['default'];
