@@ -128,12 +128,20 @@ var UseCasePopup = function (_PureComponent) {
       var oldHide = _ref3.hide,
           oldOpen = _ref3.open,
           oldWorkspaceId = _ref3.workspaceId,
-          oldTheme = _ref3.theme;
+          oldTheme = _ref3.theme,
+          oldOnOpenFn = _ref3.onOpen,
+          oldOnClose = _ref3.onClose,
+          oldOnLoginSuccess = _ref3.onLoginSuccess,
+          oldOnNewTicket = _ref3.onNewTicket;
       var _this$props = _this.props,
           hide = _this$props.hide,
           open = _this$props.open,
           workspaceId = _this$props.workspaceId,
-          theme = _this$props.theme;
+          theme = _this$props.theme,
+          onOpen = _this$props.onOpen,
+          onClose = _this$props.onClose,
+          onLoginSuccess = _this$props.onLoginSuccess,
+          onNewTicket = _this$props.onNewTicket;
 
       if (hide !== oldHide) {
         if (hide) {
@@ -158,18 +166,39 @@ var UseCasePopup = function (_PureComponent) {
       if (oldTheme !== theme) {
         _this.setTheme(theme);
       }
+
+      if (oldOnOpenFn !== onOpen && onOpen) {
+        _this.subscribeOnOpen();
+      }
+
+      if (oldOnClose !== onClose && onClose) {
+        _this.subscribeOnClose();
+      }
+
+      if (oldOnLoginSuccess !== onLoginSuccess && onLoginSuccess) {
+        _this.subscribeOnLoginSuccess();
+      }
+
+      if (oldOnNewTicket !== onNewTicket && onNewTicket) {
+        _this.subscribeOnNewTicket();
+      }
     }, _this.loadPopup = function () {
       var _this$props2 = _this.props,
           onLoad = _this$props2.onLoad,
           hide = _this$props2.hide,
           open = _this$props2.open,
-          widgetType = _this$props2.widgetType,
           theme = _this$props2.theme;
 
       if (typeof window !== 'undefined' && window.dueWork) {
         if (onLoad) {
           onLoad();
         }
+
+        // Add event listener
+        _this.subscribeOnOpen();
+        _this.subscribeOnClose();
+        _this.subscribeOnLoginSuccess();
+        _this.subscribeOnNewTicket();
 
         if (open) {
           _this.open();
@@ -183,6 +212,38 @@ var UseCasePopup = function (_PureComponent) {
           _this.setTheme(theme);
         }
       }
+    }, _this.subscribeOnOpen = function () {
+      var _this$props3 = _this.props,
+          widgetType = _this$props3.widgetType,
+          onOpen = _this$props3.onOpen;
+
+      if (typeof window !== 'undefined' && window.dueWork && onOpen) {
+        window.dueWork[widgetType].onOpen(onOpen);
+      }
+    }, _this.subscribeOnClose = function () {
+      var _this$props4 = _this.props,
+          widgetType = _this$props4.widgetType,
+          onClose = _this$props4.onClose;
+
+      if (typeof window !== 'undefined' && window.dueWork && onClose) {
+        window.dueWork[widgetType].onClose(onClose);
+      }
+    }, _this.subscribeOnLoginSuccess = function () {
+      var _this$props5 = _this.props,
+          widgetType = _this$props5.widgetType,
+          onLoginSuccess = _this$props5.onLoginSuccess;
+
+      if (typeof window !== 'undefined' && window.dueWork && onLoginSuccess) {
+        window.dueWork[widgetType].onLoginSuccess(onLoginSuccess);
+      }
+    }, _this.subscribeOnNewTicket = function () {
+      var _this$props6 = _this.props,
+          widgetType = _this$props6.widgetType,
+          onNewTicket = _this$props6.onNewTicket;
+
+      if (typeof window !== 'undefined' && window.dueWork && onNewTicket) {
+        window.dueWork[widgetType].onNewTicket(onNewTicket);
+      }
     }, _this.close = function () {
       var widgetType = _this.props.widgetType;
 
@@ -190,9 +251,9 @@ var UseCasePopup = function (_PureComponent) {
         window.dueWork[widgetType].close();
       }
     }, _this.init = function () {
-      var _this$props3 = _this.props,
-          widgetType = _this$props3.widgetType,
-          workspaceId = _this$props3.workspaceId;
+      var _this$props7 = _this.props,
+          widgetType = _this$props7.widgetType,
+          workspaceId = _this$props7.workspaceId;
 
       if (typeof window !== 'undefined' && window.dueWork) {
         window.dueWork[widgetType].init(workspaceId);
@@ -216,21 +277,21 @@ var UseCasePopup = function (_PureComponent) {
         window.dueWork[widgetType].hide();
       }
     }, _this.setTheme = function () {
-      var _this$props4 = _this.props,
-          widgetType = _this$props4.widgetType,
-          theme = _this$props4.theme;
+      var _this$props8 = _this.props,
+          widgetType = _this$props8.widgetType,
+          theme = _this$props8.theme;
 
       if (typeof window !== 'undefined' && window.dueWork) {
         window.dueWork[widgetType].setTheme(theme);
       }
     }, _this.identify = function () {
-      var _this$props5 = _this.props,
-          userId = _this$props5.userId,
-          email = _this$props5.email,
-          firstName = _this$props5.firstName,
-          lastName = _this$props5.lastName,
-          profileUrl = _this$props5.profileUrl,
-          widgetType = _this$props5.widgetType;
+      var _this$props9 = _this.props,
+          userId = _this$props9.userId,
+          email = _this$props9.email,
+          firstName = _this$props9.firstName,
+          lastName = _this$props9.lastName,
+          profileUrl = _this$props9.profileUrl,
+          widgetType = _this$props9.widgetType;
 
       if (typeof window !== 'undefined' && window.dueWork) {
         if (userId && window.dueWork[widgetType]) {
@@ -243,13 +304,13 @@ var UseCasePopup = function (_PureComponent) {
         }
       }
     }, _this.loadScript = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
-      var _this$props6, url, widgetType, workspaceId, userId, email, firstName, lastName, profileUrl;
+      var _this$props10, url, widgetType, workspaceId, userId, email, firstName, lastName, profileUrl;
 
       return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _this$props6 = _this.props, url = _this$props6.url, widgetType = _this$props6.widgetType, workspaceId = _this$props6.workspaceId, userId = _this$props6.userId, email = _this$props6.email, firstName = _this$props6.firstName, lastName = _this$props6.lastName, profileUrl = _this$props6.profileUrl;
+              _this$props10 = _this.props, url = _this$props10.url, widgetType = _this$props10.widgetType, workspaceId = _this$props10.workspaceId, userId = _this$props10.userId, email = _this$props10.email, firstName = _this$props10.firstName, lastName = _this$props10.lastName, profileUrl = _this$props10.profileUrl;
 
               if (workspaceId) {
                 _context2.next = 5;
@@ -287,7 +348,6 @@ var UseCasePopup = function (_PureComponent) {
 }(_react.PureComponent);
 
 UseCasePopup.propTypes = {
-  onLoad: _propTypes2.default.func,
   widgetType: _propTypes2.default.string,
   workspaceId: _propTypes2.default.string.isRequired,
   url: _propTypes2.default.string,
@@ -298,10 +358,16 @@ UseCasePopup.propTypes = {
   profileUrl: _propTypes2.default.string,
   hide: _propTypes2.default.bool,
   open: _propTypes2.default.bool,
-  theme: _propTypes2.default.oneOf(['yellow', 'dark', 'white'])
+  theme: _propTypes2.default.oneOf(['yellow', 'dark', 'white']),
+
+  // Events
+  onLoad: _propTypes2.default.func,
+  onOpen: _propTypes2.default.func,
+  onClose: _propTypes2.default.func,
+  onLoginSuccess: _propTypes2.default.func,
+  onNewTicket: _propTypes2.default.func
 };
 UseCasePopup.defaultProps = {
-  onLoad: null,
   widgetType: 'popup',
   url: URL,
   userId: '',
@@ -311,7 +377,14 @@ UseCasePopup.defaultProps = {
   profileUrl: '',
   hide: false,
   open: false,
-  theme: undefined
+  theme: undefined,
+
+  // Events
+  onLoad: null,
+  onOpen: null,
+  onClose: null,
+  onLoginSuccess: null,
+  onNewTicket: null
 };
 exports.default = UseCasePopup;
 module.exports = exports['default'];
