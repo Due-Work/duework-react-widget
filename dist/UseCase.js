@@ -124,7 +124,15 @@ var UseCasePopup = function (_PureComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref2 = UseCasePopup.__proto__ || (0, _getPrototypeOf2.default)(UseCasePopup)).call.apply(_ref2, [this].concat(args))), _this), _this.componentDidUpdate = function (_ref3) {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref2 = UseCasePopup.__proto__ || (0, _getPrototypeOf2.default)(UseCasePopup)).call.apply(_ref2, [this].concat(args))), _this), _this.componentDidMount = function () {
+      // Add event listener
+      _this.subscribeOnOpen();
+      _this.subscribeOnClose();
+      _this.subscribeOnLoginSuccess();
+      _this.subscribeOnNewTicket();
+    }, _this.componentWillUnmount = function () {
+      _this.unsubscribeAll();
+    }, _this.componentDidUpdate = function (_ref3) {
       var oldHide = _ref3.hide,
           oldOpen = _ref3.open,
           oldWorkspaceId = _ref3.workspaceId,
@@ -158,22 +166,6 @@ var UseCasePopup = function (_PureComponent) {
       if (oldTheme !== theme) {
         _this.setTheme(theme);
       }
-
-      // if (oldOnOpenFn !== onOpen && onOpen) {
-      //   this.subscribeOnOpen();
-      // }
-
-      // if (oldOnClose !== onClose && onClose) {
-      //   this.subscribeOnClose();
-      // }
-
-      // if (oldOnLoginSuccess !== onLoginSuccess && onLoginSuccess) {
-      //   this.subscribeOnLoginSuccess();
-      // }
-
-      // if (oldOnNewTicket !== onNewTicket && onNewTicket) {
-      //   this.subscribeOnNewTicket();
-      // }
     }, _this.loadPopup = function () {
       var _this$props2 = _this.props,
           onLoad = _this$props2.onLoad,
@@ -203,6 +195,12 @@ var UseCasePopup = function (_PureComponent) {
         if (theme) {
           _this.setTheme(theme);
         }
+      }
+    }, _this.unsubscribeAll = function () {
+      var widgetType = _this.props.widgetType;
+
+      if (typeof window !== 'undefined' && window.dueWork && window.dueWork[widgetType]) {
+        window.dueWork[widgetType].unsubscribeAll();
       }
     }, _this.subscribeOnOpen = function () {
       var _this$props3 = _this.props,

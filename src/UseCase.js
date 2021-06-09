@@ -103,26 +103,25 @@ class UseCasePopup extends PureComponent {
     onNewTicket: null
   };
 
+  componentDidMount = () => {
+    // Add event listener
+    this.subscribeOnOpen();
+    this.subscribeOnClose();
+    this.subscribeOnLoginSuccess();
+    this.subscribeOnNewTicket();
+  };
+
+  componentWillUnmount = () => {
+    this.unsubscribeAll();
+  };
+
   componentDidUpdate = ({
     hide: oldHide,
     open: oldOpen,
     workspaceId: oldWorkspaceId,
     theme: oldTheme
-    // onOpen: oldOnOpenFn,
-    // onClose: oldOnClose,
-    // onLoginSuccess: oldOnLoginSuccess,
-    // onNewTicket: oldOnNewTicket
   }) => {
-    const {
-      hide,
-      open,
-      workspaceId,
-      theme
-      // onOpen,
-      // onClose,
-      // onLoginSuccess,
-      // onNewTicket
-    } = this.props;
+    const { hide, open, workspaceId, theme } = this.props;
     if (hide !== oldHide) {
       if (hide) {
         this.hide();
@@ -146,22 +145,6 @@ class UseCasePopup extends PureComponent {
     if (oldTheme !== theme) {
       this.setTheme(theme);
     }
-
-    // if (oldOnOpenFn !== onOpen && onOpen) {
-    //   this.subscribeOnOpen();
-    // }
-
-    // if (oldOnClose !== onClose && onClose) {
-    //   this.subscribeOnClose();
-    // }
-
-    // if (oldOnLoginSuccess !== onLoginSuccess && onLoginSuccess) {
-    //   this.subscribeOnLoginSuccess();
-    // }
-
-    // if (oldOnNewTicket !== onNewTicket && onNewTicket) {
-    //   this.subscribeOnNewTicket();
-    // }
   };
 
   loadPopup = () => {
@@ -188,6 +171,17 @@ class UseCasePopup extends PureComponent {
       if (theme) {
         this.setTheme(theme);
       }
+    }
+  };
+
+  unsubscribeAll = () => {
+    const { widgetType } = this.props;
+    if (
+      typeof window !== 'undefined' &&
+      window.dueWork &&
+      window.dueWork[widgetType]
+    ) {
+      window.dueWork[widgetType].unsubscribeAll();
     }
   };
 
