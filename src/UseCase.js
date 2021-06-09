@@ -107,21 +107,21 @@ class UseCasePopup extends PureComponent {
     hide: oldHide,
     open: oldOpen,
     workspaceId: oldWorkspaceId,
-    theme: oldTheme,
-    onOpen: oldOnOpenFn,
-    onClose: oldOnClose,
-    onLoginSuccess: oldOnLoginSuccess,
-    onNewTicket: oldOnNewTicket
+    theme: oldTheme
+    // onOpen: oldOnOpenFn,
+    // onClose: oldOnClose,
+    // onLoginSuccess: oldOnLoginSuccess,
+    // onNewTicket: oldOnNewTicket
   }) => {
     const {
       hide,
       open,
       workspaceId,
-      theme,
-      onOpen,
-      onClose,
-      onLoginSuccess,
-      onNewTicket
+      theme
+      // onOpen,
+      // onClose,
+      // onLoginSuccess,
+      // onNewTicket
     } = this.props;
     if (hide !== oldHide) {
       if (hide) {

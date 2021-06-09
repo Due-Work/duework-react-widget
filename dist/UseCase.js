@@ -128,20 +128,12 @@ var UseCasePopup = function (_PureComponent) {
       var oldHide = _ref3.hide,
           oldOpen = _ref3.open,
           oldWorkspaceId = _ref3.workspaceId,
-          oldTheme = _ref3.theme,
-          oldOnOpenFn = _ref3.onOpen,
-          oldOnClose = _ref3.onClose,
-          oldOnLoginSuccess = _ref3.onLoginSuccess,
-          oldOnNewTicket = _ref3.onNewTicket;
+          oldTheme = _ref3.theme;
       var _this$props = _this.props,
           hide = _this$props.hide,
           open = _this$props.open,
           workspaceId = _this$props.workspaceId,
-          theme = _this$props.theme,
-          onOpen = _this$props.onOpen,
-          onClose = _this$props.onClose,
-          onLoginSuccess = _this$props.onLoginSuccess,
-          onNewTicket = _this$props.onNewTicket;
+          theme = _this$props.theme;
 
       if (hide !== oldHide) {
         if (hide) {
