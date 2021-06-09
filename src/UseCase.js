@@ -104,11 +104,37 @@ class UseCasePopup extends PureComponent {
   };
 
   componentDidMount = () => {
+    const { hide, open, workspaceId, theme } = this.props;
+
     // Add event listener
     this.subscribeOnOpen();
     this.subscribeOnClose();
     this.subscribeOnLoginSuccess();
     this.subscribeOnNewTicket();
+
+    if (workspaceId !== undefined) {
+      this.init(workspaceId);
+    }
+
+    if (hide !== undefined) {
+      if (hide) {
+        this.hide();
+      } else {
+        this.show();
+      }
+    }
+
+    if (open !== undefined) {
+      if (open) {
+        this.open();
+      } else {
+        this.close();
+      }
+    }
+
+    if (theme !== undefined) {
+      this.setTheme(theme);
+    }
   };
 
   componentWillUnmount = () => {
@@ -222,7 +248,12 @@ class UseCasePopup extends PureComponent {
 
   init = () => {
     const { widgetType, workspaceId } = this.props;
-    if (typeof window !== 'undefined' && window.dueWork) {
+    if (
+      typeof window !== 'undefined' &&
+      window.dueWork &&
+      window.dueWork[widgetType] &&
+      window.dueWork[widgetType].workspaceId !== workspaceId
+    ) {
       window.dueWork[widgetType].init(workspaceId);
     }
   };

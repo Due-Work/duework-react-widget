@@ -125,11 +125,42 @@ var UseCasePopup = function (_PureComponent) {
     }
 
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref2 = UseCasePopup.__proto__ || (0, _getPrototypeOf2.default)(UseCasePopup)).call.apply(_ref2, [this].concat(args))), _this), _this.componentDidMount = function () {
+      var _this$props = _this.props,
+          hide = _this$props.hide,
+          open = _this$props.open,
+          workspaceId = _this$props.workspaceId,
+          theme = _this$props.theme;
+
       // Add event listener
+
       _this.subscribeOnOpen();
       _this.subscribeOnClose();
       _this.subscribeOnLoginSuccess();
       _this.subscribeOnNewTicket();
+
+      if (workspaceId !== undefined) {
+        _this.init(workspaceId);
+      }
+
+      if (hide !== undefined) {
+        if (hide) {
+          _this.hide();
+        } else {
+          _this.show();
+        }
+      }
+
+      if (open !== undefined) {
+        if (open) {
+          _this.open();
+        } else {
+          _this.close();
+        }
+      }
+
+      if (theme !== undefined) {
+        _this.setTheme(theme);
+      }
     }, _this.componentWillUnmount = function () {
       _this.unsubscribeAll();
     }, _this.componentDidUpdate = function (_ref3) {
@@ -137,11 +168,11 @@ var UseCasePopup = function (_PureComponent) {
           oldOpen = _ref3.open,
           oldWorkspaceId = _ref3.workspaceId,
           oldTheme = _ref3.theme;
-      var _this$props = _this.props,
-          hide = _this$props.hide,
-          open = _this$props.open,
-          workspaceId = _this$props.workspaceId,
-          theme = _this$props.theme;
+      var _this$props2 = _this.props,
+          hide = _this$props2.hide,
+          open = _this$props2.open,
+          workspaceId = _this$props2.workspaceId,
+          theme = _this$props2.theme;
 
       if (hide !== oldHide) {
         if (hide) {
@@ -167,11 +198,11 @@ var UseCasePopup = function (_PureComponent) {
         _this.setTheme(theme);
       }
     }, _this.loadPopup = function () {
-      var _this$props2 = _this.props,
-          onLoad = _this$props2.onLoad,
-          hide = _this$props2.hide,
-          open = _this$props2.open,
-          theme = _this$props2.theme;
+      var _this$props3 = _this.props,
+          onLoad = _this$props3.onLoad,
+          hide = _this$props3.hide,
+          open = _this$props3.open,
+          theme = _this$props3.theme;
 
       if (typeof window !== 'undefined' && window.dueWork) {
         if (onLoad) {
@@ -203,33 +234,33 @@ var UseCasePopup = function (_PureComponent) {
         window.dueWork[widgetType].unsubscribeAll();
       }
     }, _this.subscribeOnOpen = function () {
-      var _this$props3 = _this.props,
-          widgetType = _this$props3.widgetType,
-          onOpen = _this$props3.onOpen;
+      var _this$props4 = _this.props,
+          widgetType = _this$props4.widgetType,
+          onOpen = _this$props4.onOpen;
 
       if (typeof window !== 'undefined' && window.dueWork && onOpen) {
         window.dueWork[widgetType].onOpen(onOpen);
       }
     }, _this.subscribeOnClose = function () {
-      var _this$props4 = _this.props,
-          widgetType = _this$props4.widgetType,
-          onClose = _this$props4.onClose;
+      var _this$props5 = _this.props,
+          widgetType = _this$props5.widgetType,
+          onClose = _this$props5.onClose;
 
       if (typeof window !== 'undefined' && window.dueWork && onClose) {
         window.dueWork[widgetType].onClose(onClose);
       }
     }, _this.subscribeOnLoginSuccess = function () {
-      var _this$props5 = _this.props,
-          widgetType = _this$props5.widgetType,
-          onLoginSuccess = _this$props5.onLoginSuccess;
+      var _this$props6 = _this.props,
+          widgetType = _this$props6.widgetType,
+          onLoginSuccess = _this$props6.onLoginSuccess;
 
       if (typeof window !== 'undefined' && window.dueWork && onLoginSuccess) {
         window.dueWork[widgetType].onLoginSuccess(onLoginSuccess);
       }
     }, _this.subscribeOnNewTicket = function () {
-      var _this$props6 = _this.props,
-          widgetType = _this$props6.widgetType,
-          onNewTicket = _this$props6.onNewTicket;
+      var _this$props7 = _this.props,
+          widgetType = _this$props7.widgetType,
+          onNewTicket = _this$props7.onNewTicket;
 
       if (typeof window !== 'undefined' && window.dueWork && onNewTicket) {
         window.dueWork[widgetType].onNewTicket(onNewTicket);
@@ -241,11 +272,11 @@ var UseCasePopup = function (_PureComponent) {
         window.dueWork[widgetType].close();
       }
     }, _this.init = function () {
-      var _this$props7 = _this.props,
-          widgetType = _this$props7.widgetType,
-          workspaceId = _this$props7.workspaceId;
+      var _this$props8 = _this.props,
+          widgetType = _this$props8.widgetType,
+          workspaceId = _this$props8.workspaceId;
 
-      if (typeof window !== 'undefined' && window.dueWork) {
+      if (typeof window !== 'undefined' && window.dueWork && window.dueWork[widgetType] && window.dueWork[widgetType].workspaceId !== workspaceId) {
         window.dueWork[widgetType].init(workspaceId);
       }
     }, _this.open = function () {
@@ -267,21 +298,21 @@ var UseCasePopup = function (_PureComponent) {
         window.dueWork[widgetType].hide();
       }
     }, _this.setTheme = function () {
-      var _this$props8 = _this.props,
-          widgetType = _this$props8.widgetType,
-          theme = _this$props8.theme;
+      var _this$props9 = _this.props,
+          widgetType = _this$props9.widgetType,
+          theme = _this$props9.theme;
 
       if (typeof window !== 'undefined' && window.dueWork) {
         window.dueWork[widgetType].setTheme(theme);
       }
     }, _this.identify = function () {
-      var _this$props9 = _this.props,
-          userId = _this$props9.userId,
-          email = _this$props9.email,
-          firstName = _this$props9.firstName,
-          lastName = _this$props9.lastName,
-          profileUrl = _this$props9.profileUrl,
-          widgetType = _this$props9.widgetType;
+      var _this$props10 = _this.props,
+          userId = _this$props10.userId,
+          email = _this$props10.email,
+          firstName = _this$props10.firstName,
+          lastName = _this$props10.lastName,
+          profileUrl = _this$props10.profileUrl,
+          widgetType = _this$props10.widgetType;
 
       if (typeof window !== 'undefined' && window.dueWork) {
         if (userId && window.dueWork[widgetType]) {
@@ -294,13 +325,13 @@ var UseCasePopup = function (_PureComponent) {
         }
       }
     }, _this.loadScript = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
-      var _this$props10, url, widgetType, workspaceId, userId, email, firstName, lastName, profileUrl;
+      var _this$props11, url, widgetType, workspaceId, userId, email, firstName, lastName, profileUrl;
 
       return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _this$props10 = _this.props, url = _this$props10.url, widgetType = _this$props10.widgetType, workspaceId = _this$props10.workspaceId, userId = _this$props10.userId, email = _this$props10.email, firstName = _this$props10.firstName, lastName = _this$props10.lastName, profileUrl = _this$props10.profileUrl;
+              _this$props11 = _this.props, url = _this$props11.url, widgetType = _this$props11.widgetType, workspaceId = _this$props11.workspaceId, userId = _this$props11.userId, email = _this$props11.email, firstName = _this$props11.firstName, lastName = _this$props11.lastName, profileUrl = _this$props11.profileUrl;
 
               if (workspaceId) {
                 _context2.next = 5;
