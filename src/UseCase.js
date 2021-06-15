@@ -80,7 +80,8 @@ class UseCasePopup extends PureComponent {
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
     onLoginSuccess: PropTypes.func,
-    onNewTicket: PropTypes.func
+    onNewTicket: PropTypes.func,
+    onAskUsOpened: PropTypes.func
   };
 
   static defaultProps = {
@@ -100,7 +101,8 @@ class UseCasePopup extends PureComponent {
     onOpen: null,
     onClose: null,
     onLoginSuccess: null,
-    onNewTicket: null
+    onNewTicket: null,
+    onAskUsOpened: null
   };
 
   componentDidMount = () => {
@@ -111,6 +113,7 @@ class UseCasePopup extends PureComponent {
     this.subscribeOnClose();
     this.subscribeOnLoginSuccess();
     this.subscribeOnNewTicket();
+    this.subscribeOnAskUsOpened();
 
     if (workspaceId !== undefined) {
       this.init(workspaceId);
@@ -185,6 +188,7 @@ class UseCasePopup extends PureComponent {
       this.subscribeOnClose();
       this.subscribeOnLoginSuccess();
       this.subscribeOnNewTicket();
+      this.subscribeOnAskUsOpened();
 
       if (open) {
         this.open();
@@ -236,6 +240,13 @@ class UseCasePopup extends PureComponent {
     const { widgetType, onNewTicket } = this.props;
     if (typeof window !== 'undefined' && window.dueWork && onNewTicket) {
       window.dueWork[widgetType].onNewTicket(onNewTicket);
+    }
+  };
+
+  subscribeOnAskUsOpened = () => {
+    const { widgetType, onAskUsOpened } = this.props;
+    if (typeof window !== 'undefined' && window.dueWork && onAskUsOpened) {
+      window.dueWork[widgetType].onAskUsOpened(onAskUsOpened);
     }
   };
 
